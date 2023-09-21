@@ -1,13 +1,14 @@
-import type { Character } from "../../../types";
+import { Character, PageWrapper } from "ui";
+import type { Character as CharacterInterface } from "../../../types";
 
-async function getData(id: string): Promise<Character[] | null> {
+async function getData(id: string): Promise<CharacterInterface[] | null> {
   const res = await fetch(`https://hp-api.onrender.com/api/character/${id}`);
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
 
-  return res.json() as Promise<Character[] | null>;
+  return res.json() as Promise<CharacterInterface[] | null>;
 }
 
 export default async function Page({
@@ -17,11 +18,15 @@ export default async function Page({
 }): Promise<JSX.Element> {
   const data = await getData(params.slug);
 
-  if(!data) {
-    return (<p>no data</p>)
+  if (!data) {
+    return <p>no data</p>;
   }
 
   return (
-    <p>name: {data[0].name}</p>
-  )
+    <PageWrapper>
+      <Character>
+        <Character.Name />
+      </Character>
+    </PageWrapper>
+  );
 }

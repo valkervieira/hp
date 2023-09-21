@@ -1,3 +1,4 @@
+import { PageWrapper } from "ui"
 import type { Spell } from "../../types"
 
 
@@ -26,10 +27,10 @@ export default async function Page(): Promise<JSX.Element> {
   const data = await getData()
 
   return (
-    <main>
+    <PageWrapper>
       <ul className="flex flex-col gap-4">
         {data?.map((item) => <SpellItem description={item.description} key={item.id} name={item.name}/>)}
       </ul>
-    </main>
+    </PageWrapper>
   );
 }

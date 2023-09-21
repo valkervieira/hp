@@ -18,22 +18,19 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <nav>
+      <body className={[inter.className, 'mt-14'].join(' ')}>
+        <nav className="p-4 flex justify-center bg-slyth-silver fixed top-0 left-0 w-full">
           <ul className="flex gap-4">
             <li>
-              <Link href='/characters'>
-                Characters
-              </Link>
+              <Link href="/characters">Characters</Link>
             </li>
             <li>
-              <Link href='/spellbook'>
-                Spell Book
-              </Link>
+              <Link href="/spellbook">Spell Book</Link>
             </li>
           </ul>
         </nav>
-        {children}</body>
+        {children}
+      </body>
     </html>
   );
 }

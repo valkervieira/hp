@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PageWrapper } from "ui";
 import type { Character } from "../../types";
 
 async function getData(): Promise<Character[] | null> {
@@ -27,10 +28,10 @@ export default async function Page(): Promise<JSX.Element> {
   const data = await getData();
 
   return (
-    <main>
+    <PageWrapper>
       <ul>
         {data?.map((item) => <CharacterItem id={item.id} key={item.id} name={item.name}/>)}
       </ul>
-    </main>
+    </PageWrapper>
   );
 }
