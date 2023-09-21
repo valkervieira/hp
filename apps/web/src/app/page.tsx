@@ -1,8 +1,5 @@
-export default function Page(): JSX.Element {
+import { redirect } from "next/navigation";
 
-  return (
-    <main>
-      <h1>home page</h1>
-    </main>
-  );
+export default function Page(): JSX.Element {
+  redirect('/characters')
 }
