@@ -1,4 +1,5 @@
 import { Character, PageWrapper } from "ui";
+import Image from "next/image";
 import type { Character as CharacterInterface } from "../../../types";
 
 async function getData(id: string): Promise<CharacterInterface[] | null> {
@@ -25,7 +26,10 @@ export default async function Page({
   return (
     <PageWrapper>
       <Character>
-        <Character.Name />
+        <Character.Name>{data[0].name}</Character.Name>
+        <Character.Image>
+          <Image alt={data[0].name} height={100} src={data[0].image} width={100}/>
+        </Character.Image>
       </Character>
     </PageWrapper>
   );
