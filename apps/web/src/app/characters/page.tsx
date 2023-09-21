@@ -1,34 +1,5 @@
 import Link from "next/link";
-import { Card } from "ui";
-
-interface Wand {
-  wood: string;
-  core: string;
-  length: number | null
-}
-
-interface Character {
-  id: string;
-  name: string;
-  alternate_names: string[] | [];
-  species: string;
-  gender: string;
-  house: string;
-  dateOfBirth: string;
-  yearOfBirth: number;
-  wizard: boolean;
-  ancestry: string;
-  eyeColour: string;
-  hairColour: string;
-  wand: Wand;
-  patronus: string;
-  hogwartsStudent: boolean;
-  hogwartsStaff: false;
-  actor: string;
-  alternate_actors: string[] | [];
-  alive: boolean;
-  image: string;
-}
+import type { Character } from "../../types";
 
 async function getData(): Promise<Character[] | null> {
   const res = await fetch(`https://hp-api.onrender.com/api/characters`);
@@ -57,10 +28,6 @@ export default async function Page(): Promise<JSX.Element> {
 
   return (
     <main>
-      <Card href="https://www.google.com" title="Title example">
-        Foo
-      </Card>
-
       <ul>
         {data?.map((item) => <CharacterItem id={item.id} key={item.id} name={item.name}/>)}
       </ul>

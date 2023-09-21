@@ -1,9 +1,15 @@
-import { Card } from "ui";
+import type { Spell } from "../../types"
 
-interface Spell {
-  id: string;
-  name: string;
-  description: string;
+
+function SpellItem({name, description}: Omit<Spell, 'id'>): JSX.Element {
+  return (
+    <li className="p-2 border-4">
+      <article>
+        <h2>{name}</h2>
+        <p>{description}</p>
+      </article>
+    </li>
+  )
 }
 
 async function getData(): Promise<Spell[] | null> {
@@ -21,13 +27,9 @@ export default async function Page(): Promise<JSX.Element> {
 
   return (
     <main>
-      <Card href="https://www.google.com" title="Title example">
-        Foo
-      </Card>
-
-      <pre>
-        {JSON.stringify(data, null, 2)}
-      </pre>
+      <ul className="flex flex-col gap-4">
+        {data?.map((item) => <SpellItem description={item.description} key={item.id} name={item.name}/>)}
+      </ul>
     </main>
   );
 }
