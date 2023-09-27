@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { PageWrapper } from "ui";
-import { CharacterItem, CharacterList } from "@/app/_components";
+import { CharacterItem } from "@/app/_components";
 import type { Character } from "@/app/types";
 
 const CharacterListMap = {
@@ -37,11 +37,7 @@ export default async function Page({
         <Link href="/characters/students">Students</Link>
         <Link href="/characters/staff">Staff</Link>
       </nav>
-      <CharacterList>
-        {data?.map(({ id, name }) => (
-          <CharacterItem id={id} key={id} name={name} />
-        ))}
-      </CharacterList>
+      <ul>{data?.map((character) => <CharacterItem {...character} />)}</ul>
     </PageWrapper>
   );
 }
