@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useReducer } from "react";
+import { STORAGE_KEYS } from "./constants";
 import type {
   Action,
   Dispatch,
@@ -8,9 +9,9 @@ import type {
   PreferencesState,
 } from "./types";
 
-const initialState: PreferencesState = {
+const defaultInitialState: PreferencesState = {
   bookmarks: [],
-  house: null,
+  house: "",
 };
 
 const PreferencesContext = createContext<
@@ -23,32 +24,68 @@ function preferencesReducer(
 ): PreferencesState {
   switch (action.type) {
     case "add-bookmark": {
+      // a monad here?
+      const newBookmarks = [...state.bookmarks, action.value];
+
+      localStorage.setItem(
+        STORAGE_KEYS.BOOKMARKED_CHARACTERS,
+        JSON.stringify(newBookmarks)
+      );
+
       return {
         ...state,
-        bookmarks: [...state.bookmarks, action.value],
+        bookmarks: newBookmarks,
       };
     }
     case "remove-bookmark": {
+      const newBookmarks = [
+        ...state.bookmarks.filter((bookmark) => !(bookmark === action.value)),
+      ];
+
+      localStorage.setItem(
+        STORAGE_KEYS.BOOKMARKED_CHARACTERS,
+        JSON.stringify(newBookmarks)
+      );
+
       return {
         ...state,
-        bookmarks: [
-          ...state.bookmarks.filter((bookmark) => !(bookmark === action.value)),
-        ],
+        bookmarks: newBookmarks,
       };
     }
     case "update-house": {
+      const newHouse = action.value;
+
+      localStorage.setItem(
+        STORAGE_KEYS.PREFERRED_HOUSE,
+        JSON.stringify(newHouse)
+      );
+
       return {
         ...state,
-        house: action.value,
+        house: newHouse ?? "",
       };
     }
   }
 }
 
+const getInitialState = (): PreferencesState => {
+  const cachedHouse = localStorage.getItem(STORAGE_KEYS.PREFERRED_HOUSE);
+  const cachedBookmarks = localStorage.getItem(
+    STORAGE_KEYS.BOOKMARKED_CHARACTERS
+  );
+
+  return {
+    house: cachedHouse ?? "",
+    bookmarks: cachedBookmarks
+      ? JSON.parse(cachedBookmarks.replace(/\\"/g, ""))
+      : [],
+  };
+};
+
 function PreferencesProvider({
   children,
 }: PreferencesProviderProps): JSX.Element {
-  const [state, dispatch] = useReducer(preferencesReducer, initialState);
+  const [state, dispatch] = useReducer(preferencesReducer, getInitialState());
 
   const value = { state, dispatch };
 

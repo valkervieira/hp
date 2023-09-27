@@ -10,7 +10,7 @@ export type Action =
   | { type: "update-house"; value: House };
 export type Dispatch = (action: Action) => void;
 export interface PreferencesState {
-  house: House;
+  house: string;
   bookmarks: string[];
 }
 export interface PreferencesProviderProps {

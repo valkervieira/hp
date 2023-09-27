@@ -10,7 +10,7 @@ export function CharacterContainer({
   const Element = as ? as : "article";
 
   return (
-    <Element className="ui-border-2 ui-border-raven-gold p-2">
+    <Element className="ui-border-2 ui-border-griff-gold p-2">
       {children}
     </Element>
   );

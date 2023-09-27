@@ -37,7 +37,9 @@ export default async function Page({
         <Link href="/characters/students">Students</Link>
         <Link href="/characters/staff">Staff</Link>
       </nav>
-      <ul>{data?.map((character) => <CharacterItem {...character} />)}</ul>
+      <ul className="flex flex-col gap-2">
+        {data?.map((character) => <CharacterItem {...character} />)}
+      </ul>
     </PageWrapper>
   );
 }
