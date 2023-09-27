@@ -1,7 +1,7 @@
 interface Wand {
   wood: string;
   core: string;
-  length: number | null
+  length: number | null;
 }
 
 export interface Character {
