@@ -1,6 +1,6 @@
 import { Character, PageWrapper } from "ui";
 import Image from "next/image";
-import type { Character as CharacterInterface } from "../../../types";
+import type { Character as CharacterInterface } from "@/app/types";
 
 async function getData(id: string): Promise<CharacterInterface[] | null> {
   const res = await fetch(`https://hp-api.onrender.com/api/character/${id}`);

@@ -1,5 +1,5 @@
 import { PageWrapper } from "ui";
-import type { Spell } from "../../types";
+import type { Spell } from "@/app/types";
 
 function SpellItem({ name, description }: Omit<Spell, "id">): JSX.Element {
   return (

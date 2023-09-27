@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { usePreferences } from "ui/dist/contexts";
-import type { Character } from "../../../types";
+import type { Character } from "@/app/types";
 
-export function CharacterItem({
+function CharacterItem({
   id,
   name,
 }: Pick<Character, "name" | "id">): JSX.Element {
@@ -33,3 +33,5 @@ export function CharacterItem({
     </li>
   );
 }
+
+export { CharacterItem };

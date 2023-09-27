@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { PageWrapper } from "ui";
-import type { Character } from "../../../types";
-import { CharacterItem } from "../components/character-item";
-import { CharacterList } from "../components/character-list";
+import { CharacterItem, CharacterList } from "@/app/_components";
+import type { Character } from "@/app/types";
 
 const CharacterListMap = {
   full: "",
