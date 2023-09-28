@@ -10,7 +10,7 @@ export function CharacterImage({
   return (
     <figure
       className={[
-        "ui-rounded-lg ui-overflow-hidden ui-h-[85px] ui-w-[64px] flex justify-center items-center",
+        "ui-overflow-hidden ui-flex ui-justify-center ui-w-full ui-h-64 relative",
         className,
       ].join(" ")}
     >
@@ -31,8 +31,8 @@ export function CharacterImageFallback({
   const fallback = useMemo(() => getInitials(children), [children]);
 
   return (
-    <div className="ui-w-full ui-h-full flex justify-center items-center">
-      <span>{fallback}</span>
+    <div className="ui-w-full ui-h-full ui-w-full ui-flex ui-items-center ui-justify-center ui-bg-raven-grey">
+      <span className="ui-text-white ui-text-lg">{fallback}</span>
     </div>
   );
 }

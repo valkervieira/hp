@@ -1,8 +1,8 @@
-import { Character, PageWrapper } from "ui";
-import Image from "next/image";
-import type { Character as CharacterInterface } from "@/app/types";
+import { PageWrapper } from "ui";
+import type { Character } from "@/app/types";
+import { CharacterComponent } from "@/app/_components";
 
-async function getData(id: string): Promise<CharacterInterface[] | null> {
+async function getData(id: string): Promise<Character[] | null> {
   const res = await fetch(`https://hp-api.onrender.com/api/character/${id}`);
 
   if (!res.ok) {
@@ -25,17 +25,7 @@ export default async function Page({
 
   return (
     <PageWrapper>
-      <Character>
-        <Character.Name>{data[0].name}</Character.Name>
-        <Character.Image>
-          <Image
-            alt={data[0].name}
-            height={100}
-            src={data[0].image}
-            width={100}
-          />
-        </Character.Image>
-      </Character>
+      <CharacterComponent {...data[0]} />
     </PageWrapper>
   );
 }
